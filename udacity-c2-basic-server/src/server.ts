@@ -1,7 +1,10 @@
+// Libraries
 import express, { Router, Request, Response } from 'express';
 import bodyParser from 'body-parser';
 
+// Data 
 import { Car, cars as cars_list } from './cars';
+
 
 (async () => {
   let cars:Car[]  = cars_list;
@@ -15,26 +18,33 @@ import { Car, cars as cars_list } from './cars';
   //are accessable as req.body.{{variable}}
   app.use(bodyParser.json()); 
 
-  // Root URI call
-  app.get( "/", ( req: Request, res: Response ) => {
+
+  let getRoot = ( req: Request, res: Response ) => {
+    console.log("Get root");
+    
     res.status(200).send("Welcome to the Cloud!");
-  } );
+  } 
+
+
+  let getPersonsName = ( req: Request, res: Response ) => {
+    let { name } = req.params;
+
+    if ( !name ) {
+      return res.status(400)
+                .send(`name is required`);
+    }
+
+    return res.status(200)
+              .send(`Welcome to the Cloud, ${name}!`);
+  }
+  // Root URI call
+  app.get( "/", getRoot);
 
   // Get a greeting to a specific person 
   // to demonstrate routing parameters
   // > try it {{host}}/persons/:the_name
-  app.get( "/persons/:name", 
-    ( req: Request, res: Response ) => {
-      let { name } = req.params;
-
-      if ( !name ) {
-        return res.status(400)
-                  .send(`name is required`);
-      }
-
-      return res.status(200)
-                .send(`Welcome to the Cloud, ${name}!`);
-  } );
+  app.get( "/persons/:name", getPersonsName
+     );
 
   // Get a greeting to a specific person to demonstrate req.query
   // > try it {{host}}/persons?name=the_name

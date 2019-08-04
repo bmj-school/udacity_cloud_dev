@@ -1,6 +1,12 @@
 import AWS = require('aws-sdk');
 import { config } from './config/config';
 
+// LOGGING
+const { loggers } = require('winston')
+const logger = loggers.get('my-logger')
+logger.info('Logging something in file1.js')
+
+
 const c = config.dev;
 
 //Configure AWS

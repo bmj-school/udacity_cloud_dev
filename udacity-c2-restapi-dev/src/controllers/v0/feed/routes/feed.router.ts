@@ -2,12 +2,18 @@ import { Router, Request, Response } from 'express';
 import { FeedItem } from '../models/FeedItem';
 import { requireAuth } from '../../users/routes/auth.router';
 import * as AWS from '../../../../aws';
+// LOGGING
+// const { loggers } = require('winston')
+// const logger = loggers.get('my-logger')
+// logger.info('Logging something in file1.js'
 
 const router: Router = Router();
 
 // Get all feed items
 router.get('/', async (req: Request, res: Response) => {
-    
+    // logger.verbose('GET /feed/');
+    res.write('This is a normal request, it should be logged to the console too');
+
     const items = await FeedItem.findAndCountAll({ order: [['id', 'DESC']] });
     items.rows.map((item) => {
         if (item.url) {
@@ -19,7 +25,9 @@ router.get('/', async (req: Request, res: Response) => {
 
 // Get a specific resource
 router.get('/:id',
+    
     async (req: Request, res: Response) => {
+        // logger.verbose('GET /feed/:id');
         let { id } = req.params;
         const item = await FeedItem.findByPk(id);
         res.send(item);
@@ -29,6 +37,7 @@ router.get('/:id',
 router.patch('/:id',
     requireAuth,
     async (req: Request, res: Response) => {
+        // logger.verbose('PATCH /feed/:id');
         //@TODO try it yourself
         res.send(500).send("not implemented")
     });

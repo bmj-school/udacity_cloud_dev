@@ -1,6 +1,7 @@
 import express from 'express';
 import { sequelize } from './sequelize';
 const listEndpoints = require('express-list-endpoints')
+// const reqres = require('./reqreslog');
 
 import { IndexRouter } from './controllers/v0/index.router';
 
@@ -11,6 +12,10 @@ import { V0MODELS } from './controllers/v0/model.index';
 
 // Logging - Master configuration
 const { createLogger, format, transports, loggers } = require('winston');
+// const winston = require('winston');
+// var expressWinston = require('express-winston');
+var winston = require('winston'),
+    expressWinston = require('express-winston');
 
 const logger = createLogger({
   level: 'debug',
@@ -30,8 +35,6 @@ const logger = createLogger({
 
 
 loggers.add('my-logger', logger)
-
-
 logger.debug('Debugging info');
 logger.info('Started logger');
 
@@ -46,6 +49,23 @@ logger.info('Started logger');
   const app = express();
   const port = process.env.PORT || 8080; // default port to listen
   
+  app.use(expressWinston.logger({
+    transports: [
+      new winston.transports.Console()
+    ],
+    format: winston.format.combine(
+      winston.format.colorize(),
+      // winston.format.json()
+      winston.format.simple()
+    ),
+    meta: true, // optional: control whether you want to log the meta data about the request (default to true)
+    msg: "HTTP {{req.method}} {{req.url}}", // optional: customize the default logging message. E.g. "{{res.statusCode}} {{req.method}} {{res.responseTime}}ms {{req.url}}"
+    expressFormat: true, // Use the default Express/morgan request formatting. Enabling this will override any msg if true. Will only output colors with colorize set to true
+    colorize: false, // Color the text and status code, using the Express/morgan color palette (text: gray, status: default green, 3XX cyan, 4XX yellow, 5XX red).
+    ignoreRoute: function (req, res) { return false; } // optional: allows to skip some log messages based on request and/or response
+  }));
+
+
   app.use(bodyParser.json());
 
   //CORS Should be restricted

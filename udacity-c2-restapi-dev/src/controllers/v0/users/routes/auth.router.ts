@@ -9,25 +9,34 @@ import { NextFunction } from 'connect';
 import * as EmailValidator from 'email-validator';
 import { config } from '../../../../config/config';
 
+// LOGGING
+const logger = require('./../../../../loggerConfig').logger;
+
+
 const router: Router = Router();
 
 async function generatePassword(plainTextPassword: string): Promise<string> {
     const saltRounds = 10;
     let salt = await bcrypt.genSalt(saltRounds);
-    return await bcrypt.hash(plainTextPassword, salt);
+    let hashedPass = await bcrypt.hash(plainTextPassword, salt);
+    logger.debug(`Generated password hash ${hashedPass} from ${salt}+${plainTextPassword}`);
+    return hashedPass
 }
 
 async function comparePasswords(plainTextPassword: string, hash: string): Promise<boolean> {
-    return await bcrypt.compare(plainTextPassword, hash);
+    let compare = await bcrypt.compare(plainTextPassword, hash); 
+    logger.debug(`Comparing ${plainTextPassword} with ${hash}: ${compare}`);
+    return compare
 }
 
 function generateJWT(user: User): string {
     // return jwt.sign(user.short(), "hello")
+    logger.debug(`Generating a JWT from user.short(): ${user.short()} and the JWT_SECRET`);
     return jwt.sign(user.short(), config.jwt.secret)
 }
 
 export function requireAuth(req: Request, res: Response, next: NextFunction) {
-    // return next();
+
     if (!req.headers || !req.headers.authorization){
         return res.status(401).send({ message: 'No authorization headers.' });
     }
@@ -43,6 +52,7 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
       if (err) {
         return res.status(500).send({ auth: false, message: 'Failed to authenticate.' });
       }
+      logger.debug('AUTH OK!');
       return next();
     });
 }
@@ -56,6 +66,8 @@ router.get('/verification',
 router.post('/login', async (req: Request, res: Response) => {
     const email = req.body.email;
     const password = req.body.password;
+    logger.info(`Logging in user ${email}, ${password}`);
+
     // check email is valid
     if (!email || !EmailValidator.validate(email)) {
         return res.status(400).send({ auth: false, message: 'Email is required or malformed' });
@@ -73,7 +85,10 @@ router.post('/login', async (req: Request, res: Response) => {
     }
 
     // check that the password matches
+    logger.info('Checking password match');
+    
     const authValid = await comparePasswords(password, user.password_hash)
+
 
     if(!authValid) {
         return res.status(401).send({ auth: false, message: 'Unauthorized' });
@@ -89,6 +104,9 @@ router.post('/login', async (req: Request, res: Response) => {
 router.post('/', async (req: Request, res: Response) => {
     const email = req.body.email;
     const plainTextPassword = req.body.password;
+
+    logger.info(`Registering new user ${email}, ${plainTextPassword}`);
+    
     // check email is valid
     if (!email || !EmailValidator.validate(email)) {
         return res.status(400).send({ auth: false, message: 'Email is required or malformed' });
@@ -107,6 +125,8 @@ router.post('/', async (req: Request, res: Response) => {
     }
 
     const password_hash = await generatePassword(plainTextPassword);
+    logger.info(`Storing the bcrypt salted hashed password to the DB: ${password_hash}`);
+    
 
     const newUser = await new User({
         email: email,
@@ -122,6 +142,8 @@ router.post('/', async (req: Request, res: Response) => {
 
     // Generate JWT
     const jwt = generateJWT(savedUser);
+
+    logger.debug(`${email}, returning your JWT`);
 
     res.status(201).send({token: jwt, user: savedUser.short()});
 });

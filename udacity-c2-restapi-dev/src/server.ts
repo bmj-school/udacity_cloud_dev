@@ -53,7 +53,7 @@ import { logger, expressLogger } from './loggerConfig'
 
   // List the endpoints for debugging purposes
   logger.verbose('Available Routes:');
-  listEndpoints(app).forEach(element => {
+  listEndpoints(app).forEach((element: { path: any; methods: any; }) => {
     let thisString : String = `${element.path} ${element.methods}`
     logger.verbose(`\t${thisString}`);
   });

@@ -13,7 +13,7 @@ const logger = createLogger({
         format.timestamp({
             format: 'YYYY-MM-DD HH:mm:ss'
         }),
-        format.printf(info => `\t${info.timestamp} ${info.level}: ${info.message}`)
+        format.printf((info: { timestamp: any; level: any; message: any; }) => `\t${info.timestamp} ${info.level}: ${info.message}`)
     ),
     // You can also comment out the line above and uncomment the line below for JSON format
     // format: format.json(),
@@ -36,7 +36,7 @@ const expressLogger = expressWinston.logger({
     // expressFormat: false, // Use the default Express/morgan request formatting. Enabling this will override any msg if true. Will only output colors with colorize set to true
     // colorize: false, // Color the text and status code, using the Express/morgan color palette (text: gray, status: default green, 3XX cyan, 4XX yellow, 5XX red).
     colorize: true, // Color the text and status code, using the Express/morgan color palette (text: gray, status: default green, 3XX cyan, 4XX yellow, 5XX red).
-    ignoreRoute: function (req, res) { return false; } // optional: allows to skip some log messages based on request and/or response
+    ignoreRoute: function (req : Request, res:Response) { return false; } // optional: allows to skip some log messages based on request and/or response
 });
 
 export { logger, expressLogger };

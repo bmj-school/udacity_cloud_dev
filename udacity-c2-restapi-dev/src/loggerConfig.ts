@@ -13,7 +13,7 @@ const logger = createLogger({
         format.timestamp({
             format: 'YYYY-MM-DD HH:mm:ss'
         }),
-        format.printf(info => `${info.timestamp} ${info.level}: ${info.message}`)
+        format.printf(info => `\t${info.timestamp} ${info.level}: ${info.message}`)
     ),
     // You can also comment out the line above and uncomment the line below for JSON format
     // format: format.json(),

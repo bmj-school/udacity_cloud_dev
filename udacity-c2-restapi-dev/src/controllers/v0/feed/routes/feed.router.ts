@@ -12,7 +12,7 @@ const router: Router = Router();
 // Get all feed items
 router.get('/', async (req: Request, res: Response) => {
     // logger.verbose('GET /feed/');
-    res.write('This is a normal request, it should be logged to the console too');
+    // res.write('This is a normal request, it should be logged to the console too');
 
     const items = await FeedItem.findAndCountAll({ order: [['id', 'DESC']] });
     items.rows.map((item) => {

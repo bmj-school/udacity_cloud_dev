@@ -27,7 +27,8 @@
     "pg": "^7.9.0",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^5.12.2",
-    "sequelize-typescript": "^0.6.11"
+    "sequelize-typescript": "^0.6.11",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.26",

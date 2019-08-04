@@ -3,9 +3,25 @@ import { sequelize } from './sequelize';
 
 import { IndexRouter } from './controllers/v0/index.router';
 
+
 import bodyParser from 'body-parser';
 
 import { V0MODELS } from './controllers/v0/model.index';
+
+// Logging
+const { createLogger, format, transports } = require('winston');
+
+const logger = createLogger({
+  level: 'debug',
+  // format: format.simple(),
+  format: format.combine(format.colorize(), format.simple()),
+  // You can also comment out the line above and uncomment the line below for JSON format
+  // format: format.json(),
+  transports: [new transports.Console()]
+});
+logger.debug('Debugging info');
+logger.info('Started logger');
+
 
 (async () => {
   await sequelize.addModels(V0MODELS);

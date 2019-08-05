@@ -29,6 +29,8 @@
   },
   "dependencies": {
     "express": "^4.17.0",
-    "jimp": "^0.6.4"
+    "express-winston": "^3.2.1",
+    "jimp": "^0.6.4",
+    "winston": "^3.2.1"
   }
 }

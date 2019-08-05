@@ -22,28 +22,27 @@ import { logger, expressLogger } from './loggerConfig'
   // GET /filteredimage?image_url={{URL}}
   // endpoint to filter an image from a public url.
   app.get("/filteredimage", async ( req, res ) => {
-    logger.debug("Query:", JSON.stringify(req.query));
-    // logger.debug(JSON.stringify(req.query.image_url));
+    logger.debug(`Query: ${JSON.stringify(req.query)}`);
+
+    //    1. validate the image_url query
     const imageURL = req.query.image_url;
     if (!imageURL) {
       return res.status(400).send({ message: 'parameter image_url is required' });
     }
+
+    //    2. call filterImageFromURL(image_url) to filter the image
+    let img_path = await filterImageFromURL(imageURL);
+    logger.info(`Image is saved to ${img_path}`);
+    
+    //    3. send the resulting file in the response
+    res.sendFile(img_path);
+
+    //    4. deletes any files on the server on finish of the response
+    await deleteLocalFiles([img_path]) 
+    // RETURNS
+    //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
   })
-  // IT SHOULD
-  //    1
-  //    1. validate the image_url query
-  //    2. call filterImageFromURL(image_url) to filter the image
-  //    3. send the resulting file in the response
-  //    4. deletes any files on the server on finish of the response
-  // QUERY PARAMATERS
-  //    image_url: URL of a publicly accessible image
-  // RETURNS
-  //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
-  /**************************************************************************** */
-
-  //! END @TODO1
-  
   // Root Endpoint
   // Displays a simple message to the user
   app.get( "/", async ( req, res ) => {

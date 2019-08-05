@@ -7,8 +7,8 @@ import bodyParser from 'body-parser';
 
 import { V0MODELS } from './controllers/v0/model.index';
 
-const listEndpoints = require('express-list-endpoints')
-import { logger, expressLogger } from './loggerConfig'
+const listEndpoints = require('express-list-endpoints');
+import { logger, expressLogger } from './loggerConfig';
 var assert = require('assert');
 
 logger.info('Start logging');
@@ -18,11 +18,12 @@ logger.debug('CONFIG ENVIRONMENT:');
 import { config } from './config/config';
 const c = config.dev;
 for (var key in c) {
-  logger.debug(`${key} : ${c[key]}`);
-  logger.debug(c.hasOwnProperty(key))
+  // logger.debug(`${key} : ${c[key]}`);
+  // logger.debug(c.hasOwnProperty(key))
   assert(typeof c[key] !=='undefined', `Undefined environment variable: ${key}=${c[key]}`)
 
 }
+logger.debug('All config variables (ENV variables) exist.');
 
 (async () => {
   await sequelize.addModels(V0MODELS);
@@ -30,10 +31,9 @@ for (var key in c) {
   await sequelize.sync();
   logger.info('Synced models');
   
-
   const app = express();
   app.use(expressLogger);
-  const port = process.env.PORT_FEED_SERVICE
+  const port = c.port_feed_service;
   
   app.use(bodyParser.json());
 

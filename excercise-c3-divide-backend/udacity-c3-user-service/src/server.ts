@@ -6,8 +6,24 @@ import { IndexRouter } from './controllers/v0/index.router';
 import bodyParser from 'body-parser';
 
 import { V0MODELS } from './controllers/v0/model.index';
-const listEndpoints = require('express-list-endpoints')
-import { logger, expressLogger } from './loggerConfig'
+const listEndpoints = require('express-list-endpoints');
+import { logger, expressLogger } from './loggerConfig';
+var assert = require('assert');
+
+logger.info('Start logging');
+
+//TODO: Make/keep secret
+logger.debug('CONFIG ENVIRONMENT:');
+import { config } from './config/config';
+const c = config.dev;
+for (var key in c) {
+  // logger.debug(`${key} : ${c[key]}`);
+  // logger.debug(c.hasOwnProperty(key))
+  assert(typeof c[key] !=='undefined', `Undefined environment variable: ${key}=${c[key]}`)
+
+}
+logger.debug('All config variables (ENV variables) exist.');
+
 (async () => {
   await sequelize.addModels(V0MODELS);
   await sequelize.sync();

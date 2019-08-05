@@ -9,10 +9,27 @@ import { V0MODELS } from './controllers/v0/model.index';
 
 const listEndpoints = require('express-list-endpoints')
 import { logger, expressLogger } from './loggerConfig'
+var assert = require('assert');
+
+logger.info('Start logging');
+
+//TODO: Make/keep secret
+logger.debug('CONFIG ENVIRONMENT:');
+import { config } from './config/config';
+const c = config.dev;
+for (var key in c) {
+  logger.debug(`${key} : ${c[key]}`);
+  logger.debug(c.hasOwnProperty(key))
+  assert(typeof c[key] !=='undefined', `Undefined environment variable: ${key}=${c[key]}`)
+
+}
 
 (async () => {
   await sequelize.addModels(V0MODELS);
+  logger.info('Added models');
   await sequelize.sync();
+  logger.info('Synced models');
+  
 
   const app = express();
   app.use(expressLogger);

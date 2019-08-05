@@ -1,11 +1,16 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
+import { logger, expressLogger } from './loggerConfig'
 
 (async () => {
-
+  logger.debug('Start logging');
+  
   // Init the Express application
   const app = express();
+
+  // LOGGING
+  app.use(expressLogger);
 
   // Set the network port
   const port = process.env.PORT || 8082;
@@ -16,6 +21,14 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   // @TODO1 IMPLEMENT A RESTFUL ENDPOINT
   // GET /filteredimage?image_url={{URL}}
   // endpoint to filter an image from a public url.
+  app.get("/filteredimage", async ( req, res ) => {
+    logger.debug("Query:", JSON.stringify(req.query));
+    // logger.debug(JSON.stringify(req.query.image_url));
+    const imageURL = req.query.image_url;
+    if (!imageURL) {
+      return res.status(400).send({ message: 'parameter image_url is required' });
+    }
+  })
   // IT SHOULD
   //    1
   //    1. validate the image_url query

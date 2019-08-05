@@ -3,6 +3,8 @@ import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
 import { logger, expressLogger } from './loggerConfig'
 
+var path = require('path');
+
 (async () => {
   logger.debug('Start logging');
   
@@ -35,10 +37,17 @@ import { logger, expressLogger } from './loggerConfig'
     logger.info(`Image is saved to ${img_path}`);
     
     //    3. send the resulting file in the response
-    res.sendFile(img_path);
+    res.sendFile(img_path)
 
     //    4. deletes any files on the server on finish of the response
-    await deleteLocalFiles([img_path]) 
+    res.on('finish', function() {
+      try {
+        deleteLocalFiles([img_path]);
+      } catch(e) {
+        logger.debug('Error deleting file!');
+      }
+    });
+    
     // RETURNS
     //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
   })

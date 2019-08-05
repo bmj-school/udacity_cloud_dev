@@ -27,13 +27,13 @@ var path = require('path');
     logger.debug(`Query: ${JSON.stringify(req.query)}`);
 
     //    1. validate the image_url query
-    const imageURL = req.query.image_url;
+    const imageURL : string = req.query.image_url;
     if (!imageURL) {
-      return res.status(400).send({ message: 'parameter image_url is required' });
+      return res.status(422).send({ message: 'parameter image_url is required' });
     }
 
     //    2. call filterImageFromURL(image_url) to filter the image
-    let img_path = await filterImageFromURL(imageURL);
+    let img_path : string = await filterImageFromURL(imageURL);
     logger.info(`Image is saved to ${img_path}`);
     
     //    3. send the resulting file in the response

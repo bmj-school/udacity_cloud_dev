@@ -6,15 +6,17 @@ import { IndexRouter } from './controllers/v0/index.router';
 import bodyParser from 'body-parser';
 
 import { V0MODELS } from './controllers/v0/model.index';
-
+const listEndpoints = require('express-list-endpoints')
+import { logger, expressLogger } from './loggerConfig'
 (async () => {
   await sequelize.addModels(V0MODELS);
   await sequelize.sync();
 
   const app = express();
-  const port = process.env.PORT || 8080; // default port to listen
-  
+  const port = process.env.PORT_USER_SERVICE 
+
   app.use(bodyParser.json());
+  app.use(expressLogger);
 
   //CORS Should be restricted
   app.use(function(req, res, next) {
@@ -30,6 +32,12 @@ import { V0MODELS } from './controllers/v0/model.index';
     res.send( "/api/v0/" );
   } );
   
+  // List the endpoints for debugging purposes
+  logger.verbose('Available Routes:');
+  listEndpoints(app).forEach((element: { path: any; methods: any; }) => {
+    let thisString : String = `${element.path} ${element.methods}`
+    logger.verbose(`\t${thisString}`);
+  });
 
   // Start the Server
   app.listen( port, () => {

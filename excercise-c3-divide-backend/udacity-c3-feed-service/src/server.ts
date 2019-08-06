@@ -21,7 +21,6 @@ for (var key in c) {
   // logger.debug(`${key} : ${c[key]}`);
   // logger.debug(c.hasOwnProperty(key))
   assert(typeof c[key] !=='undefined', `Undefined environment variable: ${key}=${c[key]}`)
-
 }
 logger.debug('All config variables (ENV variables) exist.');
 
@@ -30,11 +29,11 @@ logger.debug('All config variables (ENV variables) exist.');
   logger.info('Added models');
   await sequelize.sync();
   logger.info('Synced models');
-  
+
   const app = express();
   app.use(expressLogger);
   const port = c.port_feed_service;
-  
+
   app.use(bodyParser.json());
 
   //CORS Should be restricted
@@ -57,7 +56,7 @@ logger.debug('All config variables (ENV variables) exist.');
     let thisString : String = `${element.path} ${element.methods}`
     logger.verbose(`\t${thisString}`);
   });
-  
+
 
   // Start the Server
   app.listen( port, () => {

@@ -10,5 +10,5 @@ docker run \
 -e PORT_FEED_SERVICE=$PORT_FEED_SERVICE \
 -e PORT_USER_SERVICE=$PORT_USER_SERVICE \
  --publish 8080:8080 \
- --name feed plasmafrog/udacity-restapi-feed
+ --name feed plasmafrog/udacity-c3-feed-service
 

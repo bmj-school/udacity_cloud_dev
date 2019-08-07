@@ -1,4 +1,4 @@
-docker run \
+docker run --rm \
 -e POSTGRES_USERNAME=$POSTGRES_USERNAME \
 -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
 -e POSTGRES_DATABASE=$POSTGRES_DATABASE \
@@ -11,4 +11,3 @@ docker run \
 -e PORT_USER_SERVICE=$PORT_USER_SERVICE \
  --publish 8080:8080 \
  --name feed plasmafrog/udacity-c3-feed-service
-

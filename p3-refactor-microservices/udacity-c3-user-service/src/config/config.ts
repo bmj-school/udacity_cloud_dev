@@ -7,9 +7,9 @@ export const config = {
     "dialect": "postgres",
     "aws_reigion": process.env.POSTGRES_AWS_REGION,
     "aws_profile": process.env.POSTGRES_AWS_PROFILE,
-    "aws_media_bucket": process.env.POSTGRES_AWS_MEDIA_BUCKET,
-    "port_feed_service": process.env.PORT_FEED_SERVICE,
-    "port_user_service": process.env.PORT_USER_SERVICE
+    "aws_media_bucket": process.env.POSTGRES_AWS_MEDIA_BUCKET
+    // "port_feed_service": process.env.PORT_FEED_SERVICE,
+    // "port_user_service": process.env.PORT_USER_SERVICE
   },
   "prod": {
     "username": "",

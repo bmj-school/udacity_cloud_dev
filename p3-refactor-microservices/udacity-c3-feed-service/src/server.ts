@@ -32,7 +32,9 @@ logger.debug('All config variables (ENV variables) exist.');
 
   const app = express();
   app.use(expressLogger);
-  const port = c.port_feed_service;
+  // const port = c.port_feed_service;
+  const port = process.env.PORT || 8080; // default port to listen
+
 
   app.use(bodyParser.json());
 

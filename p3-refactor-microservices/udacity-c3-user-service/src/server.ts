@@ -29,7 +29,8 @@ logger.debug('All config variables (ENV variables) exist.');
   await sequelize.sync();
 
   const app = express();
-  const port = process.env.PORT_USER_SERVICE 
+  // const port = process.env.PORT_USER_SERVICE
+  const port = process.env.PORT || 8080; // default port to listen
 
   app.use(bodyParser.json());
   app.use(expressLogger);
@@ -47,7 +48,7 @@ logger.debug('All config variables (ENV variables) exist.');
   app.get( "/", async ( req, res ) => {
     res.send( "/api/v0/" );
   } );
-  
+
   // List the endpoints for debugging purposes
   logger.verbose('Available Routes:');
   listEndpoints(app).forEach((element: { path: any; methods: any; }) => {

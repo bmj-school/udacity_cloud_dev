@@ -28,7 +28,7 @@
     "jsonwebtoken": "^8.5.1",
     "pg": "^7.9.0",
     "reflect-metadata": "^0.1.13",
-    "sequelize": "^5.3.5",
+    "sequelize": "^5.12.3",
     "sequelize-typescript": "^0.6.9",
     "winston": "^3.2.1"
   },
@@ -41,7 +41,7 @@
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
     "mocha": "^6.1.4",
-    "ts-node-dev": "^1.0.0-pre.32",
+    "ts-node-dev": "^1.0.0-pre.40",
     "tslint": "^5.14.0",
     "typescript": "^3.3.4000"
   }

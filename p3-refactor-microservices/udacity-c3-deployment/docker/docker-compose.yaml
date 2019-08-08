@@ -24,8 +24,8 @@ services:
       URL: "http://localhost:8100"
   backend-feed:
     image: plasmafrog/udacity-c3-feed-service
-    # volumes:
-    #   - $HOME/.aws:/root/.aws
+    volumes: 
+      - $HOME/.aws_udacity:/root/.aws # Mount local
     environment:
       POSTGRES_USERNAME: $POSTGRES_USERNAME
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD

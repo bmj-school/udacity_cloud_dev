@@ -2,9 +2,11 @@ import AWS = require('aws-sdk');
 import { config } from './config/config';
 
 const c = config.dev;
-
+import { logger } from './loggerConfig';
 //Configure AWS
-var credentials = new AWS.SharedIniFileCredentials({profile: 'default'});
+var credentials = new AWS.SharedIniFileCredentials({profile: c.aws_profile});
+logger.info(`Using AWS credential ${c.aws_profile}`);
+
 AWS.config.credentials = credentials;
 
 export const s3 = new AWS.S3({

@@ -1,2 +1,2 @@
 source .env
-npm run dev --prefix ./udacity-c3-user-service
+npm run dev --prefix ./udacity-c3-restapi-user

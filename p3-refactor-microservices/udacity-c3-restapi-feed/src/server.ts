@@ -13,21 +13,15 @@ var assert = require('assert');
 
 logger.info('Start logging');
 
-//TODO: Make/keep secret
-logger.debug('CONFIG ENVIRONMENT:');
 import { config } from './config/config';
 const c : any = config.dev;
-// console.log(config['dev']);
 
 var key : string;
 for (key in c) {
-  // console.log(c[key]);
-  // console.log(key);
-  //TODO: NOT SECURE!
-  //TODO - asdf
-  logger.debug(`${key} : ${c[key]}`);
-  // logger.debug(c.hasOwnProperty(key))
-  assert(typeof c[key] !=='undefined' || c[key]==='', `Undefined environment variable: ${key}=${c[key]}`)
+  //TODO: NOT SECURE! Only print variables during debugging!
+  // logger.debug(`${key} : ${c[key]}`);
+
+  assert(typeof c[key] !=='undefined' || c[key]=='', `Undefined environment variable: ${key}=${c[key]}`)
 }
 logger.debug('All config variables (ENV variables) exist.');
 

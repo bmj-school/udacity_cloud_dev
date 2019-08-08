@@ -15,6 +15,13 @@ export const s3 = new AWS.S3({
   params: {Bucket: c.aws_media_bucket}
 });
 
+s3.listBuckets(function(err, data) {
+  if (err) {
+    logger.error(`ERROR ${err}`);
+  } else {
+    logger.info(`AWS credentials successfully applied, check-value: ${data.Buckets.length}`);
+  }
+});
 
 /* getGetSignedUrl generates an aws signed url to retreive an item
  * @Params

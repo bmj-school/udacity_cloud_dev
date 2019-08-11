@@ -1,0 +1,6 @@
+cluster_name = "demo"
+#aws_region = "eu-central-1"
+aws_region = "us-east-2"
+worker_os = "ubuntu"
+ssh_public_key_file="~/.ssh/id_rsa.pub"
+control_plane_type="t3.medium"

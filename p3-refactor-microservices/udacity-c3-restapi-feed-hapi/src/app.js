@@ -1,24 +1,25 @@
 const Hapi = require('hapi');
-/**
- * Class Definition for the REST API
- */
+
+import { sequelize } from './sequelize';
+
+
 class TheServer {
 
-    /**
-     * Constructor that allows initialize the class 
-     */
     constructor() {
 		this.server = Hapi.Server({
             port: 8000,
             host: 'localhost'
         });
+
+        await sequelize.addModels(V0MODELS);
+        logger.info('Added models');
+        await sequelize.sync();
+        logger.info('Synced models')
+
         this.initRoutes();
         this.start();
     }
 
-    /**
-     * Initilization of the routes
-     */
 	initRoutes() {
         require("./routes/TestRoutes.js")(this.server); // For learning Hapi!
         // require("./routes/StarRoutes.js")(this.server); // According to specifications

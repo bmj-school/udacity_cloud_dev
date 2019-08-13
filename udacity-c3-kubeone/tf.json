@@ -8,7 +8,7 @@
       }
     ],
     "value": {
-      "endpoint": "demo-api-lb-7a8be4b90816cdf3.elb.us-east-2.amazonaws.com"
+      "endpoint": "demo-api-lb-8d1a930d28c8861b.elb.us-east-2.amazonaws.com"
     }
   },
   "kubeone_hosts": {
@@ -58,19 +58,19 @@
         "cloud_provider": "aws",
         "cluster_name": "demo",
         "hostnames": [
-          "ip-172-31-7-55.us-east-2.compute.internal",
-          "ip-172-31-21-243.us-east-2.compute.internal",
-          "ip-172-31-38-58.us-east-2.compute.internal"
+          "ip-172-31-8-10.us-east-2.compute.internal",
+          "ip-172-31-24-7.us-east-2.compute.internal",
+          "ip-172-31-42-179.us-east-2.compute.internal"
         ],
         "private_address": [
-          "172.31.7.55",
-          "172.31.21.243",
-          "172.31.38.58"
+          "172.31.8.10",
+          "172.31.24.7",
+          "172.31.42.179"
         ],
         "public_address": [
-          "18.191.210.132",
-          "13.58.186.9",
-          "13.58.125.182"
+          "18.216.137.251",
+          "18.216.89.172",
+          "18.224.213.234"
         ],
         "ssh_agent_socket": "env:SSH_AUTH_SOCK",
         "ssh_port": 22,
@@ -150,7 +150,7 @@
             "instanceType": "t3.medium",
             "region": "us-east-2",
             "securityGroupIDs": [
-              "sg-06cd5a1f802ac26c2"
+              "sg-02371f0dee42bea60"
             ],
             "subnetId": "subnet-858b9ded",
             "tags": {

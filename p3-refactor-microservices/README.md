@@ -6,6 +6,8 @@
 
 > The project demonstrates an understanding of CI and Github. All project code is stored in a GitHub repository and a link to the repository has been provided for reviewers. The student uses a CI tool to build the application.
 
+
+
 ---
 
 >The project has a proper documentation. The README file includes introduction how to setup and deploy the project. It explains the main building blocks and has comments in the important files.
@@ -15,15 +17,6 @@
 ## feed-service
 
 ## user-service
-
-Docker testing matrix: 
-
-| component    | port | npm run dev | npm run prod |
-|--------------|------|-------------|--------------|
-| feed-service | 8080 | OK          | OK           |
-| user-service | 8080 | OK          | OK           |
-| frontend     | 8100 | OK          | N/A          |
-| reverseproxy | 8080 | N/A         | N/A          |
 
 
 ---
@@ -36,6 +29,15 @@ Docker testing matrix:
 > The app is containerized. There is a Dockerfile in repo and the docker image can be build. 
 
 Dockerfile exists in each component folder. 
+
+Docker testing matrix: 
+
+| component    | port | npm run dev | npm run prod |
+|--------------|------|-------------|--------------|
+| feed-service | 8080 | OK          | OK           |
+| user-service | 8080 | OK          | OK           |
+| frontend     | 8100 | OK          | N/A          |
+| reverseproxy | 8080 | N/A         | N/A          |
 
 ---
 
@@ -64,6 +66,13 @@ Shell scripts are provided for each component, as well as a master docker-compos
 ---
 
 > The application runs on a cluster in the cloud. The project can be deployed to a kubernetes cluster. 
+
+Kubernetes nodes:
+```
+ip-172-31-27-34.us-east-2.compute.internal    Ready    master   4h4m   v1.14.2
+ip-172-31-37-143.us-east-2.compute.internal   Ready    master   4h2m   v1.14.2
+ip-172-31-4-105.us-east-2.compute.internal    Ready    master   4h5m   v1.14.2
+```
 
 ---
 

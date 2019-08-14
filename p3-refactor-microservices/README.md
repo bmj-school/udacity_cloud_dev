@@ -2,15 +2,19 @@
 
 ## CI/DC, Github & Code Quality
 
-#### The project demonstrates an understanding of CI and Github. All project code is stored in a GitHub repository and a link to the repository has been provided for reviewers. The student uses a CI tool to build the application.
+---
+
+> The project demonstrates an understanding of CI and Github. All project code is stored in a GitHub repository and a link to the repository has been provided for reviewers. The student uses a CI tool to build the application.
+
+---
+
+>The project has a proper documentation. The README file includes introduction how to setup and deploy the project. It explains the main building blocks and has comments in the important files.
 
 
 
-#### The project has a proper documentation. The README file includes introduction how to setup and deploy the project. It explains the main building blocks and has comments in the important files.
+## feed-service
 
-The project use continuous deployments (CD)
-
-A CD tool is in place to deploy new version of the app automatically to production. The way is described and easy to follow.
+## user-service
 
 Docker testing matrix: 
 
@@ -32,7 +36,9 @@ Docker hub links:
 | reverseproxy | [reverseproxy](https://hub.docker.com/r/plasmafrog/reverseproxy)                                                      |
 
 
-## feed-service
 
-## user-service
+#### The project use continuous deployments (CD). A CD tool is in place to deploy new version of the app automatically to production. The way is described and easy to follow.
+
+
+
 

@@ -1,6 +1,6 @@
 
 
-## CI/DC, Github & Code Quality
+### Criteria section: CI/DC, Github & Code Quality
 
 ---
 
@@ -26,6 +26,22 @@ Docker testing matrix:
 | reverseproxy | 8080 | N/A         | N/A          |
 
 
+---
+
+> The project use continuous deployments (CD). A CD tool is in place to deploy new version of the app automatically to production. The way is described and easy to follow.
+
+
+### Criteria section: Container
+
+> The app is containerized. There is a Dockerfile in repo and the docker image can be build. 
+
+Dockerfile exists in each component folder. 
+
+---
+
+> The project have public docker images. On DockerHub images for the application are available.
+
+
 Docker hub links: 
 
 | component    | Dockerized                                                                                                            |
@@ -35,10 +51,29 @@ Docker hub links:
 | frontend     | [udacity-frontend](https://hub.docker.com/r/plasmafrog/udacity-frontend)                                              |
 | reverseproxy | [reverseproxy](https://hub.docker.com/r/plasmafrog/reverseproxy)                                                      |
 
+---
 
+> The applications runs in a container without errors. Starting the app as a container on a local system. 
 
-#### The project use continuous deployments (CD). A CD tool is in place to deploy new version of the app automatically to production. The way is described and easy to follow.
+Shell scripts are provided for each component, as well as a master docker-compose shell script. Environment variables are loaded by a `.env` script (not pushed to Github for security reasons). 
 
+---
 
+### Criteria section: Deployment
 
+---
 
+> The application runs on a cluster in the cloud. The project can be deployed to a kubernetes cluster. 
+
+---
+
+> The app can be upgraded via rolling-update. The students can deploy a new version of the application without downtime. 
+
+---
+
+> A/B deployment of the application. Two versions of the 
+same app can run at the same and service traffic. 
+
+---
+
+ > Monitoring. The application is monitored by Amazon CloudWatch

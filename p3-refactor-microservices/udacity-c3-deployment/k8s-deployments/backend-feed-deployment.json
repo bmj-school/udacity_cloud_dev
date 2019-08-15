@@ -32,22 +32,21 @@
                 }
               },
               "env": [
-                { "name": "URL",                "valueFrom": { "configMapKeyRef": { "name": "env-config", "key": "URL" } } },
-                { "name": "AWS_BUCKET",         "valueFrom": { "configMapKeyRef": { "name": "env-config", "key": "AWS_BUCKET" } } },
-                { "name": "AWS_PROFILE",        "valueFrom": { "configMapKeyRef": { "name": "env-config", "key": "AWS_PROFILE" } } },
-                { "name": "AWS_REGION",         "valueFrom": { "configMapKeyRef": { "name": "env-config", "key": "AWS_REGION" } } },
-                { "name": "JWT_SECRET",         "valueFrom": { "configMapKeyRef": { "name": "env-config", "key": "JWT_SECRET" } } },
-                { "name": "POSTGRESS_DB",       "valueFrom": { "configMapKeyRef": { "name": "env-config", "key": "POSTGRESS_DB" } } },
-                { "name": "POSTGRESS_HOST",     "valueFrom": { "configMapKeyRef": { "name": "env-config", "key": "POSTGRESS_HOST" } } },
-                { "name": "POSTGRESS_PASSWORD", "valueFrom": { "secretKeyRef": { "name": "env-secret", "key": "POSTGRESS_PASSWORD" } } },
-                { "name": "POSTGRESS_USERNAME", "valueFrom": { "secretKeyRef": { "name": "env-secret", "key": "POSTGRESS_USERNAME" } } }
+                { "name": "POSTGRES_USERNAME",          "valueFrom": { "secretKeyRef": { "name": "env-secret", "key": "POSTGRES_USERNAME" } } },
+                { "name": "POSTGRES_PASSWORD",          "valueFrom": { "secretKeyRef": { "name": "env-secret", "key": "POSTGRES_PASSWORD" } } },
+                { "name": "POSTGRES_DATABASE",          "valueFrom": { "secretKeyRef": { "name": "env-secret", "key": "POSTGRES_DATABASE" } } },
+                { "name": "POSTGRES_HOST",              "valueFrom": { "secretKeyRef": { "name": "env-secret", "key": "POSTGRES_HOST" } } },
+                { "name": "POSTGRES_AWS_REGION",        "valueFrom": { "secretKeyRef": { "name": "env-secret", "key": "POSTGRES_AWS_REGION" } } },
+                { "name": "POSTGRES_AWS_PROFILE",       "valueFrom": { "secretKeyRef": { "name": "env-secret", "key": "POSTGRES_AWS_PROFILE" } } },
+                { "name": "POSTGRES_AWS_MEDIA_BUCKET",  "valueFrom": { "secretKeyRef": { "name": "env-secret", "key": "POSTGRES_AWS_MEDIA_BUCKET" } } },
+                { "name": "JWT_SECRET",                 "valueFrom": { "secretKeyRef": { "name": "env-secret", "key": "JWT_SECRET" } } }
               ],
               "volumeMounts": [
                 {
                   "name": "aws-secret",
                   "mountPath": "/root/.aws/",
                   "readOnly": true
-                }
+                }          
               ]
             }
           ],

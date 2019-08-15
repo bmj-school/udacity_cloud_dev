@@ -1,4 +1,23 @@
+# Overview
 
+
+## Secret and configuration management
+
+| Environment Variables     | 
+|---------------------------|
+| POSTGRES_USERNAME         |
+| POSTGRES_PASSWORD         |
+| POSTGRES_DATABASE         |
+| POSTGRES_HOST             |
+| POSTGRES_AWS_REGION       |
+| POSTGRES_AWS_PROFILE      |
+| POSTGRES_AWS_MEDIA_BUCKET |
+| JWT_SECRET                |
+
+AWS credentials
+$HOME/.aws_udacity:/root/.aws
+
+## Criteria completion: 
 
 ### Criteria section: CI/DC, Github & Code Quality
 

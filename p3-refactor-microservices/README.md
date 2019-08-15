@@ -1,9 +1,46 @@
 # Overview
 
+## Components 
+
+Each component is contained in a dedicated sub-folder in the present repo. 
+
+Each component:
+1. Has a `Dockerfile`
+1. Is deployed to docker-hub
+1. Has a k8s deployment in the `/udacity-c3-deployment/k8s-deployments` folder
+1. Has a corresponding k8s service in the `/udacity-c3-deployment/k8s-services` folder
+1. Has been deployed to kubernetes live cluster
+
+For local testing; 
+1. Scripts for testing straight typescript code are found in the root directory, for example `run-feed-service-local-dev.sh`. 
+1. Scripts for testing the created docker images are found, for example `run-feed-service-docker.sh`. 
+1. A script for running all containers is also created; `run-docker-compose-up.sh`. 
+
+These scripts depend on the `.env` file, which is not deployed to GitHub for security reasons. 
+
+### feed-service
+/udacity-c3-restapi-feed
+
+### user-service
+/udacity-c3-restapi-user
+
+### reverseproxy
+/udacity-c3-restapi-reverseproxy
+
+### frontend
+/udacity-c3-frontend
+
+
 
 ## Secret and configuration management
 
-### k8s secrets 
+### Local secrets 
+A `.env` file is executed to load environments. The .aws folder is mounted. 
+
+### Kubernetes secrets 
+
+`aws-secret.yaml` and `.env-secret.yaml` are git-ignored for security. They contain; 
+
 | Environment Variables     |
 |---------------------------|
 | POSTGRES_USERNAME         |
@@ -19,14 +56,29 @@ AWS credentials
 
 $HOME/.aws_udacity:/root/.aws
 
+Confirmed deployment: 
+```
+> k get secrets
+NAME                  TYPE                                  DATA   AGE
+aws-secret            Opaque                                2      45m
+default-token-7zmv7   kubernetes.io/service-account-token   3      24h
+env-secret            Opaque                                8      45m
+```
+
 ### k8s configmaps
 
 | Environment Variables |
 |-----------------------|
 | URL                   |
 
+Confirmed: 
+```
+NAME         DATA   AGE
+env-config   1      46m
+```
 
-## Criteria completion: 
+
+## Criteria completion
 
 ### Criteria section: CI/DC, Github & Code Quality
 
@@ -34,18 +86,16 @@ $HOME/.aws_udacity:/root/.aws
 
 > The project demonstrates an understanding of CI and Github. All project code is stored in a GitHub repository and a link to the repository has been provided for reviewers. The student uses a CI tool to build the application.
 
+(Present github repo)
+
+Travis 
 
 
 ---
 
 >The project has a proper documentation. The README file includes introduction how to setup and deploy the project. It explains the main building blocks and has comments in the important files.
 
-
-
-## feed-service
-
-## user-service
-
+(See above overview section)
 
 ---
 

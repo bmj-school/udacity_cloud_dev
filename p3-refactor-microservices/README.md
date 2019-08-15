@@ -3,7 +3,8 @@
 
 ## Secret and configuration management
 
-| Environment Variables     | 
+### k8s secrets 
+| Environment Variables     |
 |---------------------------|
 | POSTGRES_USERNAME         |
 | POSTGRES_PASSWORD         |
@@ -15,7 +16,15 @@
 | JWT_SECRET                |
 
 AWS credentials
+
 $HOME/.aws_udacity:/root/.aws
+
+### k8s configmaps
+
+| Environment Variables |
+|-----------------------|
+| URL                   |
+
 
 ## Criteria completion: 
 

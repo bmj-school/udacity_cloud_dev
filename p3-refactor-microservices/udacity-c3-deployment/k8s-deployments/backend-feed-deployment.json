@@ -32,6 +32,7 @@
                 }
               },
               "env": [
+                { "name": "URL",                        "valueFrom": { "configMapKeyRef": { "name": "env-config", "key": "URL" } } },
                 { "name": "POSTGRES_USERNAME",          "valueFrom": { "secretKeyRef": { "name": "env-secret", "key": "POSTGRES_USERNAME" } } },
                 { "name": "POSTGRES_PASSWORD",          "valueFrom": { "secretKeyRef": { "name": "env-secret", "key": "POSTGRES_PASSWORD" } } },
                 { "name": "POSTGRES_DATABASE",          "valueFrom": { "secretKeyRef": { "name": "env-secret", "key": "POSTGRES_DATABASE" } } },

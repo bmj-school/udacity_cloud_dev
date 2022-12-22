@@ -25,7 +25,7 @@
     "express": "^4.16.4",
     "express-list-endpoints": "^4.0.1",
     "express-winston": "^3.2.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "pg": "^7.9.0",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^5.12.2",
